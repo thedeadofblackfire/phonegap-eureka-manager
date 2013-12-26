@@ -61,6 +61,7 @@ var appEbox = {
     },
     
     takeScanner: function() {
+        alert('takeScanner');
       cordova.plugins.barcodeScanner.scan(
           function (result) {
               alert("We got a barcode\n" +
