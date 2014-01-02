@@ -7,8 +7,8 @@
   -->
   <tabs tabs-style="tabs-icon-top" tabs-type="tabs-positive" animate-nav="false">
 
-    <!-- Pets tab -->
-    <tab title="Pets" icon="icon ion-home" ng-controller="PetsTabCtrl">
+    <!-- Productions tab -->
+    <tab title="Productions" icon="icon ion-home" ng-controller="PetsTabCtrl">
       <content has-header="true" has-tabs="true">
         <list>
           <item ng-repeat="pet in pets" type="item-text-wrap" href="#/pet/{{pet.id}}">
@@ -44,14 +44,16 @@
     </tab>
 
     <!-- Home tab -->
-    <tab title="About" icon="icon ion-search">
+    <tab title="Map" icon="icon ion-map">
       <content has-header="true" has-tabs="true" padding="true">
         <h3>About this app</h3>
         <p>
           This is a sample seed project for the Ionic Framework. Please change it to match your needs.
         </p>
-        <button onclick="appEbox.takePicture();">Take Picture</button>
-                
+        <button class="button button-energized" onclick="appEbox.takeScanner();">
+          button-energized
+        </button>
+             
         <button onclick="appEbox.takeScanner();">Take Scanner</button>
       </content>
     </tab>

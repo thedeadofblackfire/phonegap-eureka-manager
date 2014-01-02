@@ -16,7 +16,6 @@
         MLS Technologies
     </author>
 
-
     <!--
         If you do not want any permissions to be added to your app, add the
         following tag to your config.xml; you will still have the INTERNET
@@ -73,12 +72,13 @@
     <icon src="res/icon/ios/72-2x.png"         gap:platform="ios"        width="144" height="144" />
     -->
     <!-- Define app splash screen for each platform. -->
-	<!--<gap:splash src="splash.png" />-->
+	<gap:splash src="splash.png" />
+    <!--
     <gap:splash src="res/drawable-mdpi/logo.9.png"  gap:platform="android" gap:density="mdpi" />
     <gap:splash src="res/drawable-hdpi/logo.9.png"  gap:platform="android" gap:density="hdpi" />
     <gap:splash src="res/drawable-xhdpi/logo.9.png" gap:platform="android" gap:density="xhdpi" /> 
     <gap:splash src="res/drawable-xxhdpi/logo.9.png" gap:platform="android" gap:density="xxhdpi" /> 
-	
+	-->
     <!--
 	<gap:splash src="res/screen/android/screen-ldpi-portrait.png"  gap:platform="android" gap:density="ldpi" />
     <gap:splash src="res/screen/android/screen-mdpi-portrait.png"  gap:platform="android" gap:density="mdpi" />
