@@ -17,7 +17,7 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('LoginController',function($scope,$location,$http){
+.controller('LoginCtrl',function($scope,$location,$http){
   $scope.myTitle = 'Page One';
 
   $scope.leftButtons = [
@@ -76,8 +76,8 @@ angular.module('starter.controllers', [])
             wcFwk.ajax_postJsonAsync(API+'/authlogin', {'logemails':$scope.emailLog,'logpasss':$scope.passLog}, function(data) {
                  if (data.success) {
                     console.log(data);
-                    //$scope.login_success='success';
-                    $location.path('/#/productions');
+                    $scope.login_success='success';
+                    $location.path('/productions');
                     
                  }
                  

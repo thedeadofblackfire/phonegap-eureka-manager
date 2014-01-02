@@ -17,7 +17,7 @@ angular.module('starter', ['ionic', 'ngRoute', 'ngAnimate', 'starter.services', 
   // updates a navigation bar
   $routeProvider.when('/home', {
     templateUrl: 'templates/login.html',
-    controller: 'AppCtrl'
+    controller: 'LoginCtrl'
   });
   
    $routeProvider.when('/productions', {
