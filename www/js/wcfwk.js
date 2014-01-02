@@ -1,4 +1,22 @@
 var wcFwk = {  
+
+    /* ------------- */   
+    /* LOCAL STORAGE */
+    /* ------------- */     
+    DB : function(key) {
+       var store = window.localStorage;
+       return {
+          get: function() {
+             //window.localStorage.getItem('user_lat');
+             return JSON.parse(store[key] || '{}');   
+          },
+          put: function(data) {
+             store[key] = JSON.stringify(data);
+             //window.localStorage.setItem('user_lat', LatitudeCarteClick);
+          }
+       }
+    },
+
     /* ------------- */   
     /* NATIVE AJAX   */
     /* ------------- */ 
@@ -22,6 +40,12 @@ var wcFwk = {
       xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
       json_data = encodeURIComponent(JSON.stringify(data));
       xhr.send(json_data);
+    },
+    
+    ajax_postJsonSync : function(url, params, lambda, lambdaerror) {            
+      var payload = (params) ? wcFwk.getAsUriParameters(params) : '';
+      var options = {async: false};
+      wcFwk.ajax_sendRequest(url, 'POST', payload, lambda, lambdaerror, options);
     },
     
     ajax_postJsonAsync : function(url, params, lambda, lambdaerror) {            
@@ -84,79 +108,7 @@ var wcFwk = {
         //else xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');         
         xhr.send(params);
     },
-      
-        getHWId : function() {
-                return device.uuid || '';
-        },
-        
-        register : function(token, lambda, lambdaerror) {
-                var method = 'POST';
-                var url = ImPush.baseurl + 'registerDevice';
-                
-                var offset = new Date().getTimezoneOffset() * 60;        //in seconds
-                
-                var language = window.navigator.language;
-                var lang = 'en';
-                if(language) {
-                     lang = language.substring(0,2); 
-                }
-                
-                var deviceType = 1;
-                if (device.platform == 'android' || device.platform == 'Android') {
-                    deviceType = 2;
-                }
-				
-				var deviceModel = device.model || '';
-				var deviceVersion = device.version || '';
 
-                var params = {
-								//user_id : ImPush.userId,
-                                request : {
-                                        user_id : ImPush.userId,
-                                        application : ImPush.appCode,
-                                        push_token : token,
-                                        language : lang,
-                                        hwid : ImPush.getHWId(),
-                                        timezone : offset,
-                                        device_type : deviceType,
-                                        model : deviceModel,
-                                        version : deviceVersion
-                                }
-                        };
-
-				//payload = params;
-                payload = (params) ? JSON.stringify(params) : '';			
-                ImPush.helper(url, method, payload, lambda, lambdaerror);
-        },
-
-        helper : function(url, method, params, lambda, lambdaerror) {
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {		
-                        if(xhr.readyState == 4) { //Request complete !!
-                                if(xhr.status == 200) {
-                                        if(lambda) lambda(xhr.responseText);
-                                }
-                                else {
-                                        if(lambdaerror) lambdaerror(xhr.responseText);
-                                }
-                        }
-                };
-
-                // open the client
-                xhr.open(method, url, true);
-                xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-				//xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
-		
-                // send the data
-				//alert("helper: " + params);
-                xhr.send(params);
-        }
-        
-          /*
-    url = Object.keys(data).map(function(k) {
-        return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
-    }).join('&')
-    */  
     /*
 function sendRequest(url,callback,postData) {
 	//var req = createXMLHTTPObject();
@@ -181,6 +133,3 @@ function sendRequest(url,callback,postData) {
 }
 */
 };
-
-//ImPush.baseurl = 'http://www.textsol.com/api/notification/';
-//if (ENV == 'dev') ImPush.baseurl = BASE_URL+'/api/notification/';

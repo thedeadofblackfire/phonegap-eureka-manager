@@ -11,9 +11,9 @@
     <tab title="Productions" icon="icon ion-home" ng-controller="PetsTabCtrl">
       <content has-header="true" has-tabs="true">
         <list>
-          <item ng-repeat="pet in pets" type="item-text-wrap" href="#/pet/{{pet.id}}">
-              <h3>{{pet.title}}</h3>
-              <p>{{pet.description}}</p>
+          <item ng-repeat="prod in productions" type="item-text-wrap" href="#/prod/{{prod.prod_number}}">
+              <h3>{{prod.prod_number}}</h3>
+              <p>{{prod.l_name}} {{prod.f_name}}</p>
             </item>
           </item>
         </list>
@@ -21,10 +21,10 @@
     </tab>
 
     <!-- Adoption tab -->
-    <tab title="Adopt" icon="icon ion-heart">
+    <tab title="Login" icon="icon ion-heart">
       <content has-header="true" has-tabs="true">
         <div class="padding">
-          <h2>Adopt a pet today.</h2>
+          <h2>Login.</h2>
         </div>
         <div class="list list-inset">
           <label class="item item-input">

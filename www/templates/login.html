@@ -1,0 +1,48 @@
+<nav-page id="app-pagelogin" ng-controller="LoginController" title="myTitle" icon="icon ion-home" left-buttons="leftButtons" right-buttons="rightButtons">
+<!--
+<div class="bar bar-header bar-positive">
+  <h1 class="title">bar-positive</h1>
+</div>
+-->
+    <content padded="true">
+        
+        <div class="padding">
+          <h2>Login.</h2>
+        </div>
+
+        <form name="loginForm"  >
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="email" placeholder="E-mail" ng-model="emailLog" value="taro@robotikdose.fr">
+                </label>
+                <label class="item item-input">
+                    <input type="password" placeholder="Password" ng-model="passLog">
+                </label>
+            </div>
+            <div class="padding">
+                <div><span class="error_forget">{{login_error}}</span><span class="valid_forget">{{login_success}}</span></div>
+                <button type="submit" class="button button-block button-positive" ng-click="LoginFormbut();">Login</button>                  
+            </div>
+        </form>
+        
+        <!--
+        <div class="list list-inset">
+          <label class="item item-input">
+            <span class="input-label">Your email</span>
+            <input type="text" id="username" name="username" value="taro@robotikdose.fr">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Your password</span>
+            <input type="password" id="password" name="password" value="office2013">
+          </label>
+       
+          <button class="button button-positive button-block">Submit</button>
+        </div>
+        -->
+      </content>
+      
+      <div class="bar bar-footer bar-light">
+  <div class="title">(c) copyrights 2013 - Eureka Platform</div>
+</div>
+
+</nav-page>

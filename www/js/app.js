@@ -16,13 +16,18 @@ angular.module('starter', ['ionic', 'ngRoute', 'ngAnimate', 'starter.services', 
   // These are then tied up to our nav router which animates and
   // updates a navigation bar
   $routeProvider.when('/home', {
+    templateUrl: 'templates/login.html',
+    controller: 'AppCtrl'
+  });
+  
+   $routeProvider.when('/productions', {
     templateUrl: 'templates/app.html',
     controller: 'AppCtrl'
   });
 
   // if the url matches something like /pet/2 then this route
   // will fire off the PetCtrl controller (controllers.js)
-  $routeProvider.when('/pet/:petId', {
+  $routeProvider.when('/prod/:prodId', {
     templateUrl: 'templates/pet.html',
     controller: 'PetCtrl'
   });
