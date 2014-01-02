@@ -71,4 +71,35 @@ if (Object.keys(CONFIG).length == 0 || (CONFIG.ts + 3600 < ts)) {
       return productions[prodId];
     }
   }
+})
+
+.factory('User', function($rootScope, $location) {
+
+  var isLoggedIn = false;
+
+  // Load auth token from somewhere, like localStorage
+  isLoggedIn = window.localStorage['token'] != null;
+
+
+  $rootScope.$on('user.logout', function() {
+    isLoggedIn = false;
+
+    // redir to login page
+    $location.path('/');
+  });
+
+  return {
+    isLoggedIn: function() { 
+        return isLoggedIn; 
+    },
+    login: function(username, password) {
+      // Do login here
+      // If login worked, trigger event
+      $rootScope.$broadcast('user.login');
+    },
+    logout: function() {
+      $rootScope.$broadcast('user.logout');
+    }
+  }
+  
 });

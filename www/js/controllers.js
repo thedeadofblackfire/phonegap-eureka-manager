@@ -33,6 +33,7 @@ angular.module('starter.controllers', [])
       type: 'button-clear',
       content: 'Edit',
       tap: function(e) {
+        alert('coucou');
       }
     }
   ]
@@ -67,14 +68,17 @@ angular.module('starter.controllers', [])
         
         var emailLog=$scope.emailLog!=null?$scope.emailLog:'';
         var passLog=$scope.passLog!=null?$scope.passLog:'';
-        alert(emailLog+' '+passLog);
+        //alert(emailLog+' '+passLog);
         if(emailLog!='' && passLog!='')
         {
-            alert($scope.emailLog);
+            //alert($scope.emailLog);
             
             wcFwk.ajax_postJsonAsync(API+'/authlogin', {'logemails':$scope.emailLog,'logpasss':$scope.passLog}, function(data) {
-         
+                 if (data.success) {
                  console.log(data);
+                    $scope.login_success='success';
+                 }
+                 
               });
             
             /*

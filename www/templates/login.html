@@ -1,4 +1,4 @@
-<nav-page id="app-pagelogin" ng-controller="LoginController" title="myTitle" icon="icon ion-home" left-buttons="leftButtons" right-buttons="rightButtons">
+<nav-page id="app-pagelogin" hide-nav-bar="true" ng-controller="LoginController" title="myTitle" icon="icon ion-home" left-buttons="leftButtons" right-buttons="rightButtons">
 <!--
 <div class="bar bar-header bar-positive">
   <h1 class="title">bar-positive</h1>
@@ -20,7 +20,10 @@
                 </label>
             </div>
             <div class="padding">
-                <div><span class="error_forget">{{login_error}}</span><span class="valid_forget">{{login_success}}</span></div>
+                <div>
+                <span class="error_forget">{{login_error}}</span>
+                <span class="valid_forget">{{login_success}}</span>
+                </div>
                 <button type="submit" class="button button-block button-positive" ng-click="LoginFormbut();">Login</button>                  
             </div>
         </form>
