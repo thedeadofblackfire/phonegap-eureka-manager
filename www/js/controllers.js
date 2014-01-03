@@ -73,12 +73,15 @@ angular.module('starter.controllers', [])
         {
             //alert($scope.emailLog);
             
-            wcFwk.ajax_postJsonAsync(API+'/authlogin', {'logemails':$scope.emailLog,'logpasss':$scope.passLog}, function(data) {
+            wcFwk.ajax_postJsonAsync(API+'/authlogin', {'login':$scope.emailLog,'pass':$scope.passLog,'rememberme': 1}, function(data) {
+                 console.log(data);
                  if (data.success) {
-                    console.log(data);
+                    console.log(data.user);
+                    dbAppUser.put(data.user);
                     $scope.login_success='success';
-                    $location.path('/productions');
-                    
+                    $location.path('/productions');                    
+                 } else {
+                    $scope.login_error='Invalid Email Address/Password';
                  }
                  
               });

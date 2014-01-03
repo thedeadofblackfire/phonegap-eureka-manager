@@ -6,6 +6,8 @@ if (window.location.hostname == 'ebox.phonegap.local') {
 }
 var API = BASE_URL+'/api/mobile';
 
+var dbAppUser = dbAppUser || wcFwk.DB("app_user");
+
 /* ------------- */   
 /* Ebox          */
 /* ------------- */  
