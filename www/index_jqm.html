@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>e-Box</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">  
+    <link rel="stylesheet" href="jqm/jquery.mobile-1.4.0.min.css">     
+    <link href="css/app.css" rel="stylesheet">    
+	<!--<link rel="shortcut icon" href="../favicon.ico"> -->
+	<script src="jqm/jquery.min.js"></script>
+	<script src="jqm/jquery.mobile-1.4.0.min.js"></script>
+       
+    <!-- cordova script -->
+    <script src="phonegap.js"></script>
+    <script src="barcodescanner.js"></script>
+
+    <!-- your app's script -->
+    <script src="js/wcfwk.js"></script>
+    <script src="js/ebox.jqm.js"></script>
+  </head>
+
+<body>
+
+  <div data-role="page" id="pageLogin" data-theme="a">     
+        <div role="main" class="ui-content">
+            <p style="text-align:center"><img src="img/logo.png" alt="e-Box"></p>
+		
+            <form id="formLogin" method="POST" class="ui-body ui-body-a ui-corner-all">               
+                <fieldset>
+                    <div class="ui-field-contain">
+                        <label for="username" class="ui-hidden-accessible">Enter your email:</label>
+                        <input type="email" name="username" id="username" placeholder="Email" value="" />
+                    </div>                                  
+                    <div class="ui-field-contain">                                      
+                        <label for="password" class="ui-hidden-accessible">Enter your password:</label>
+                        <input type="password" name="password" id="password" placeholder="Password" value="" /> 
+                    </div>
+                    <!--
+					<input type="checkbox" name="rememberme" id="rememberme" class="custom" data-mini="true" value="1" checked>
+                    <label for="rememberme">Remember me (2 weeks)</label>
+                    <input type="submit" name="submit" id="submit" value="Login">
+                    -->                    
+                    <a href="#" id="btnLogin" class="ui-btn ui-corner-all ui-icon-carat-r ui-shadow ui-btn-icon-right">Login</a>
+                </fieldset>
+            </form>   
+
+		<!--<a data-role="button" href="register" data-prefetch="true" data-corners="false" data-icon="plus">Register an account</a>	-->	   
+        <p><center><small>Copyright (c) 2014 - MLS Technologies</small></center></p>		  
+        </div>   
+    </div>
+    
+<!-- Start of first page: #one -->
+<div data-role="page" id="pageProductions">
+
+	<div data-role="header">
+		<h1>Productions</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content" id="listview-content" >
+    
+        <div id="container_productionlist"></div>
+        
+		<h2>One</h2>
+	
+		<p>You link to internal pages by referring to the <code>id</code> of the page you want to show. For example, to <a href="#two" >link</a> to the page with an <code>id</code> of "two", my link would have a <code>href="#two"</code> in the code.</p>
+
+		<h3>Show internal pages:</h3>
+		<p><a href="#two" class="ui-btn ui-shadow ui-corner-all">Show page "two"</a></p>
+		<p><a href="#popup" class="ui-btn ui-shadow ui-corner-all" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
+	</div><!-- /content -->
+
+	<div data-role="footer" data-theme="a">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page one -->
+
+<!-- Start of second page: #two -->
+<div data-role="page" id="two" data-theme="a">
+
+	<div data-role="header">
+		<h1>Two</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<h2>Two</h2>
+		<p>I have an id of "two" on my page container. I'm the second page container in this multi-page template.</p>
+		<p>Notice that the theme is different for this page because we've added a few <code>data-theme</code> swatch assigments here to show off how flexible it is. You can add any content or widget to these pages, but we're keeping these simple.</p>
+		<p><a href="#one" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Back to page "one"</a></p>
+
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page two -->
+
+<!-- Start of third page: #popup -->
+<div data-role="page" id="popup">
+
+	<div data-role="header" data-theme="b">
+		<h1>Dialog</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<h2>Popup</h2>
+		<p>I have an id of "popup" on my page container and only look like a dialog because the link to me had a <code>data-rel="dialog"</code> attribute which gives me this inset look and a <code>data-transition="pop"</code> attribute to change the transition to pop. Without this, I'd be styled as a normal page.</p>
+		<p><a href="#one" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">Back to page "one"</a></p>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page popup -->
+
+ <script type="text/javascript">
+     appEbox.initialize();              
+ </script>
+        
+</body>
+</html>

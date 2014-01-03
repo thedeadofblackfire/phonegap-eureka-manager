@@ -28,8 +28,9 @@ if (Object.keys(CONFIG).length == 0 || (CONFIG.ts + 3600 < ts)) {
    dbAppConfig.put(CONFIG);
 }
 */
-
-  wcFwk.ajax_postJsonSync(API+'/getproductions', {office_seq: '1002' }, function(data) {
+  var user = dbAppUser.get();
+  console.log(user);
+  wcFwk.ajax_postJsonSync(API+'/getproductions', {office_seq: user.office.office_seq }, function(data) {
     if (data.items) {       
         for (var i = 0; i < data.items.length; i++) {
             var obj = data.items[i];
