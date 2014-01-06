@@ -77,11 +77,16 @@
       </div>
       <div role="main" class="ui-content">
       <p>
+      <input type="hidden" name="scanner_datamatrix" id="scanner_datamatrix" value="" />
       <button class="ui-btn" onclick="appEbox.takeScannerDatamatrix();">Datamatrix</button>
       </p>
       <p>
+        <input type="hidden" name="scanner_code128" id="scanner_code128" value="" />
         <button class="ui-btn" onclick="appEbox.takeScannerCode();">Code 128</button>
          </p> 
+         <p>
+         <div id="scanner_result"></div>
+         </p>
       </div>      	  
   </div>
   

@@ -72,10 +72,19 @@ var appEbox = {
       // alert('takeScanner DATA_MATRIX');
       cordova.plugins.barcodeScanner.scan(
           function (result) {
+              if (result.format == 'DATA_MATRIX') {
+                $('#scanner_datamatrix').val(result.text);
+                alert('Success: '+result.text);
+                controlScanner();
+              } else {
+                alert('Please scan the datamatrix on the header bag');
+              }
+              /*
               alert("We got a datamatrix\n" +
                     "Result: " + result.text + "\n" +
                     "Format: " + result.format + "\n" +
                     "Cancelled: " + result.cancelled);
+                    */
           }, 
           function (error) {
               alert("Scanning failed: " + error);
@@ -87,10 +96,19 @@ var appEbox = {
       // alert('takeScanner CODE_128');
       cordova.plugins.barcodeScanner.scan(
           function (result) {
+              if (result.format == 'CODE_128') {
+                $('#scanner_code128').val(result.text);
+                alert('Success: '+result.text);
+                controlScanner();
+              } else {
+                alert('Please scan the barcode on the ebox');
+              }
+              /*
               alert("We got a barcode\n" +
                     "Result: " + result.text + "\n" +
                     "Format: " + result.format + "\n" +
                     "Cancelled: " + result.cancelled);
+               */
           }, 
           function (error) {
               alert("Scanning failed: " + error);
@@ -188,12 +206,18 @@ jQuery(document).ready(function($){
        var $page = $( pageSelector );
        var $header = $page.children( ":jqmData(role=header)" );
        $header.find( "h1" ).html('Production #'+prodnumber);
-             
+         
+/*         
        var chapterHTML = '';
        chapterHTML += 'toto';
        
        $content = $page.children( ":jqmData(role=main)" );
        $content.html(chapterHTML);
+       */
+       $('#scanner_datamatrix').val('');
+       $('#scanner_code128').val('');
+       $('#scanner_result').html('');
+       
               
        options.dataUrl = urlObj.href;
        //options.changeHash = false;
@@ -364,6 +388,18 @@ jQuery(document).ready(function($){
         //str += '><a href="#pageChatSession?id=' + v.session_id + '" sid="'+v.session_id+'" data-theme="e">' + lg + v.name + ' <p class="ui-li-aside">started at <strong>'+formatDate(v.start_date)+'</strong></p> <span class="ui-li-count">'+(parseInt(v.totalmsg) + parseInt(v.totalreply))+'</span></a></li>';
 
         return str;
+    }
+    
+    function controlScanner() {
+        var datamatrix = $('#scanner_datamatrix').val();
+        var code128 = $('#scanner_code128').val();
+        if (datamatrix != '' && code128 != '') {
+            if (datamatrix == code128) {
+                $('#scanner_result').html('SUCCESS');
+            } else {
+                $('#scanner_result').html('FAIL');
+            }
+        }
     }
 
   	
