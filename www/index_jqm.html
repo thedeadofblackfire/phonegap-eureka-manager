@@ -52,7 +52,7 @@
     </div>
     
 <!-- Start of first page: #one -->
-<div data-role="page" id="pageProductions">
+<div data-role="page" id="pageList">
 
 	<div data-role="header">
 		<h1>Productions</h1>
@@ -61,14 +61,7 @@
 	<div role="main" class="ui-content" id="listview-content" >
     
         <div id="container_productionlist"></div>
-        
-		<h2>One</h2>
-	
-		<p>You link to internal pages by referring to the <code>id</code> of the page you want to show. For example, to <a href="#two" >link</a> to the page with an <code>id</code> of "two", my link would have a <code>href="#two"</code> in the code.</p>
-
-		<h3>Show internal pages:</h3>
-		<p><a href="#two" class="ui-btn ui-shadow ui-corner-all">Show page "two"</a></p>
-		<p><a href="#popup" class="ui-btn ui-shadow ui-corner-all" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
+        	
 	</div><!-- /content -->
 
 	<div data-role="footer" data-theme="a">
@@ -76,6 +69,16 @@
 	</div><!-- /footer -->
 </div><!-- /page one -->
 
+
+   <div data-role="page" id="pageProd">
+      <div data-role="header" data-position="fixed">
+          <a data-role="button" href="#pageList" data-icon="bars" data-iconpos="notext" data-theme="c" data-inline="true" class="ui-icon-alt ui-btn-left">List</a>		 
+          <h1></h1>		
+      </div>
+      <div role="main" class="ui-content">
+      </div>      	  
+  </div>
+  
 <!-- Start of second page: #two -->
 <div data-role="page" id="two" data-theme="a">
 

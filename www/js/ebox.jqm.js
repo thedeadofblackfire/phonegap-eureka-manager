@@ -112,8 +112,8 @@ jQuery(document).ready(function($){
        // checkPreAuth();
     });
     
-	$(document).on('pagebeforeshow', '#pageProductions', function(){  
-		console.log('#pageProductions pagebeforeshow');	
+	$(document).on('pagebeforeshow', '#pageList', function(){  
+		console.log('#pageList pagebeforeshow');	
 		
           //var user = dbAppUser.get();
           //console.log(objUser);
@@ -135,9 +135,94 @@ jQuery(document).ready(function($){
 	
     });   
     
+        
+    // Listen for any attempts to call changePage().     
+    $(document).bind( "pagebeforechange", function( e, data ) {
+
+        // We only want to handle changePage() calls where the caller is
+        // asking us to load a page by URL.
+        if ( typeof data.toPage === "string" ) {
+            //console.log(data);
+        
+            // We are being asked to load a page by URL, but we only
+            // want to handle URLs that request the data for a specific
+            // category.
+            var url = $.mobile.path.parseUrl( data.toPage ),
+                regex = /^#pageProd/;  
+            
+            if ( url.hash.search(regex) !== -1 ) {
+                console.log(url);
+
+                // We're being asked to display the items for a specific category.
+                // Call our internal method that builds the content for the category
+                // on the fly based on our in-memory category data structure.               
+                loadProduction(url, data.options);
+
+                // Make sure to tell changePage() we've handled this call so it doesn't have to do anything.
+                e.preventDefault();                
+            }
+            
+        }
+    });
+
+
+    function loadProduction(urlObj, options) {      
+        var params = hashParams(urlObj.hash);
+  
+        var prodnumber = params['id'];
+        if( !prodnumber ) {
+          mofChangePage('#pageList');
+          return
+        };
+        
+        console.log('loadProduction '+prodnumber);
+     
+       // show loading icon
+       $.mobile.loading('show'); 
+       
+       var res = objProduction[ prodnumber ];
+       console.log(res);
+       
+       var pageSelector = urlObj.hash.replace( /\?.*$/, "" );
+               
+       var $page = $( pageSelector );
+       var $header = $page.children( ":jqmData(role=header)" );
+       $header.find( "h1" ).html('Production #'+prodnumber);
+             
+       var chapterHTML = '';
+       chapterHTML += 'toto';
+       
+       $content = $page.children( ":jqmData(role=main)" );
+       $content.html(chapterHTML);
+              
+       options.dataUrl = urlObj.href;
+       //options.changeHash = false;
+       //console.log(options);                      
+
+       // switch to the page we just modified.
+       $.mobile.changePage( $page, options );          
+                                   
+    };
+
+        
 });
 
 
+    // parse params in hash
+	function hashParams(hash) {
+		var ret = {};
+	    var match;
+	    var plus   = /\+/g;
+	    var search = /([^\?&=]+)=([^&]*)/g;
+	    var decode = function(s) { 
+	    	return decodeURIComponent(s.replace(plus, " ")); 
+	    };
+	    while( match = search.exec(hash) ) ret[decode(match[1])] = decode(match[2]);
+	    
+	    return ret
+	};
+    
+    
     /* 
      * mobile framework - Change Page
      * pageid = test.html or #changePage
@@ -206,7 +291,7 @@ jQuery(document).ready(function($){
 					
                     mofProcessBtn("#btnLogin", false);
                     
-                    mofChangePage('#pageProductions');
+                    mofChangePage('#pageList');
 				} else {	
                     //Invalid Email Address/Password
 					console.log(res.redirection_error);
