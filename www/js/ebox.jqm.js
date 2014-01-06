@@ -205,9 +205,9 @@ jQuery(document).ready(function($){
                
        var $page = $( pageSelector );
        var $header = $page.children( ":jqmData(role=header)" );
-       $header.find( "h1" ).html('Production #'+prodnumber);
+       $header.find( "h1" ).html('#'+prodnumber);
          
-/*         
+       /*         
        var chapterHTML = '';
        chapterHTML += 'toto';
        
@@ -217,8 +217,9 @@ jQuery(document).ready(function($){
        $('#scanner_datamatrix').val('');
        $('#scanner_code128').val('');
        $('#scanner_result').html('');
-       
-              
+       var reference = res.device_serial+''+res.prod_number;       
+       $('#scanner_reference').val(reference);
+         
        options.dataUrl = urlObj.href;
        //options.changeHash = false;
        //console.log(options);                      
@@ -394,10 +395,12 @@ jQuery(document).ready(function($){
         var datamatrix = $('#scanner_datamatrix').val();
         var code128 = $('#scanner_code128').val();
         if (datamatrix != '' && code128 != '') {
+            var reference = $('#scanner_reference').val();
             if (datamatrix == code128) {
-                $('#scanner_result').html('SUCCESS');
+                if (datamatrix == reference) $('#scanner_result').html('SUCCESS');
+                else $('#scanner_result').html('FAIL Barcodes are matched but not with the production number.');
             } else {
-                $('#scanner_result').html('FAIL');
+                $('#scanner_result').html('FAIL Barcodes are not matched.');
             }
         }
     }
