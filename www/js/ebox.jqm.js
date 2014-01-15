@@ -12,7 +12,8 @@ var objProduction = {};
 
 /* ------------- */   
 /* Ebox          */
-/* ------------- */  
+/* ------------- */ 
+// it should work on local storage if no connection 
 var appEbox = {
     // Application Constructor
     initialize: function() {
@@ -73,11 +74,24 @@ var appEbox = {
       cordova.plugins.barcodeScanner.scan(
           function (result) {
               if (result.format == 'DATA_MATRIX') {
-                $('#scanner_datamatrix').val(result.text);
                 alert('Success: '+result.text);
-                controlScanner();
+                
+                var reference = $('#scanner_reference').val();  
+                if (result.text != '' && result.text == reference) {
+                    $('#scanner_datamatrix').val(result.text);
+                    $('#btn_scanner_datamatrix').removeClass('ui-btn-c');
+                    $('#btn_scanner_datamatrix').addClass('ui-btn-b');
+                    controlScanner();
+                } else {
+                    alert('Value not match with '+reference);
+                    $('#btn_scanner_datamatrix').removeClass('ui-btn-b');
+                    $('#btn_scanner_datamatrix').addClass('ui-btn-c');
+                }
+                                 
               } else {
                 alert('Please scan the datamatrix on the header bag');
+                $('#btn_scanner_datamatrix').removeClass('ui-btn-b');
+                $('#btn_scanner_datamatrix').addClass('ui-btn-c');
               }
               /*
               alert("We got a datamatrix\n" +
@@ -88,6 +102,8 @@ var appEbox = {
           }, 
           function (error) {
               alert("Scanning failed: " + error);
+              $('#btn_scanner_datamatrix').removeClass('ui-btn-b');
+              $('#btn_scanner_datamatrix').addClass('ui-btn-c');
           }
        );
     },
@@ -97,11 +113,24 @@ var appEbox = {
       cordova.plugins.barcodeScanner.scan(
           function (result) {
               if (result.format == 'CODE_128') {
-                $('#scanner_code128').val(result.text);
                 alert('Success: '+result.text);
-                controlScanner();
+                
+                var reference = $('#scanner_reference').val();  
+                if (result.text != '' && result.text == reference) {
+                    $('#scanner_code128').val(result.text);
+                    $('#btn_scanner_code128').removeClass('ui-btn-c');
+                    $('#btn_scanner_code128').addClass('ui-btn-b');
+                    controlScanner();
+                } else {
+                    alert('Value not match with '+reference);
+                    $('#btn_scanner_code128').removeClass('ui-btn-b');
+                    $('#btn_scanner_code128').addClass('ui-btn-c');
+                }                                
+                                
               } else {
                 alert('Please scan the barcode on the ebox');
+                $('#btn_scanner_code128').removeClass('ui-btn-b');
+                $('#btn_scanner_code128').addClass('ui-btn-c');
               }
               /*
               alert("We got a barcode\n" +
@@ -112,6 +141,8 @@ var appEbox = {
           }, 
           function (error) {
               alert("Scanning failed: " + error);
+              $('#btn_scanner_code128').removeClass('ui-btn-b');
+              $('#btn_scanner_code128').addClass('ui-btn-c');
           }
        );
     }
@@ -219,6 +250,8 @@ jQuery(document).ready(function($){
        $('#scanner_result').html('');
        var reference = res.device_serial+''+res.prod_number;       
        $('#scanner_reference').val(reference);
+       $('#scanner_prodnumber').val(res.prod_number);
+       $('#scanner_prodfileseq').val(res.prodfile_seq);
          
        options.dataUrl = urlObj.href;
        //options.changeHash = false;
@@ -397,8 +430,42 @@ jQuery(document).ready(function($){
         if (datamatrix != '' && code128 != '') {
             var reference = $('#scanner_reference').val();
             if (datamatrix == code128) {
-                if (datamatrix == reference) $('#scanner_result').html('SUCCESS');
-                else $('#scanner_result').html('FAIL Barcodes are matched but not with the production number.');
+                if (datamatrix == reference) {
+                    $('#scanner_result').html('SUCCESS');
+                    // call ajax here, it should be on local storage if no connection
+                    
+                    $.mobile.loading('show');
+                    
+                    var prodnumber = $('#scanner_prodnumber').val();
+                    var obj = objProduction[ prodnumber ];
+                                       
+                    $.post(API+"/matchproduction", {prodfile_seq:obj.prodfile_seq, prod_number:obj.prod_number, driver_user_seq: objUser.user_id}, function(res) {
+                        console.log(res);
+                        
+                        if(res.success == true) {
+                                                                      
+                            $.mobile.loading('hide');
+                            
+                            $('#scanner_result').append('<p>Save on server</p>');
+                            
+                            //mofProcessBtn("#btnLogin", false);
+                            
+                            //mofChangePage('#pageList');
+                        } else {	
+                            //Invalid Email Address/Password
+                            console.log(res.message);
+                            if (ENV == 'dev') {
+                                alert(res.message);
+                            } else {
+                                navigator.notification.alert(res.message, alertDismissed);
+                            }	
+                            //mofProcessBtn("#btnLogin", false);
+                       }
+                    },"json");            
+                    
+                } else { 
+                    $('#scanner_result').html('FAIL Barcodes are matched but not with the production number.');
+                }
             } else {
                 $('#scanner_result').html('FAIL Barcodes are not matched.');
             }
