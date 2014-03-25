@@ -247,7 +247,11 @@ jQuery(document).ready(function($){
        */       
        //$('#production_title').html(res.device_serial);       
        $('#production_detail').html('Production: <b>'+prodnumber+'</b><br>Start: '+res.delivery_dt_start+'<br>End: '+res.delivery_dt_end+'<br>Total pouchs: '+res.total_bags+'<br>Total drugs: '+res.total_drugs);
-       $('#production_patient').html('Ebox: <b>'+res.device_serial+'</b><br>Patient: <b>'+res.f_name+' '+res.l_name+' ('+res.gender+')</b><br>Phone: '+res.phone_home+'<br>Cell Phone: '+res.phone_cell);
+       var strpatient = 'Ebox: <b>'+res.device_serial+'</b><br>Patient: <b>'+res.f_name+' '+res.l_name+'</b>';
+       if (res.phone_home !== null && res.phone_home !== undefined && res.phone_home != '') strpatient += '<br>Phone: '+res.phone_home;
+       if (res.phone_cell !== null && res.phone_cell !== undefined && res.phone_cell != '') strpatient += '<br>Cell Phone: '+res.phone_cell;
+       
+       $('#production_patient').html(strpatient);
        
        $('#btn_scanner_code128').removeClass('ui-btn-b');
        $('#btn_scanner_code128').removeClass('ui-btn-c');
