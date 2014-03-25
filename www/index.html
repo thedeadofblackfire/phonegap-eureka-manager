@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">  
-    <!--<link rel="stylesheet" href="jqm/jquery.mobile-1.4.0.min.css"> -->    
+    <link rel="stylesheet" href="jqm/jquery.mobile-1.4.2.min.css"> 
     <link rel="stylesheet" href="jqm/themes/jqm-ebox.min.css" />
     <link rel="stylesheet" href="jqm/themes/jquery.mobile.icons.min.css" />
-    <link rel="stylesheet" href="jqm/jquery.mobile.structure-1.4.0.min.css">   
+    <link rel="stylesheet" href="jqm/jquery.mobile.structure-1.4.2.min.css">   
     <link href="css/app.css" rel="stylesheet">    
 	<!--<link rel="shortcut icon" href="../favicon.ico"> -->
 	<script src="jqm/jquery.min.js"></script>
-	<script src="jqm/jquery.mobile-1.4.0.min.js"></script>
+	<script src="jqm/jquery.mobile-1.4.2.min.js"></script>
        
     <!-- cordova script -->
     <script src="phonegap.js"></script>
@@ -77,10 +77,20 @@
 
    <div data-role="page" id="pageProd">
       <div data-role="header" data-position="fixed">
-          <a data-role="button" href="#pageList" data-icon="bars" data-iconpos="notext" data-inline="true" class="ui-icon-alt ui-btn-left">List</a>		 
+          <a data-role="button" href="#pageList" data-icon="back" data-iconpos="notext" data-inline="true" class="ui-icon-alt ui-btn-left">List</a>		 
           <h1></h1>		
       </div>
       <div role="main" class="ui-content">
+      
+      <div class="ui-body ui-body-a ui-corner-all">
+        <h3 id="production_title"></h3>
+        <div class="ui-grid-a">
+            <div class="ui-block-a"><div class="ui-bar " stylex="height:60px" id="production_patient"></div></div>
+            <div class="ui-block-b"><div class="ui-bar" stylex="height:60px" id="production_detail"></div></div>
+        </div><!-- /grid-a -->
+      </div>
+  
+   
        <input type="hidden" name="scanner_prodfileseq" id="scanner_prodfileseq" value="" />
        <input type="hidden" name="scanner_prodnumber" id="scanner_prodnumber" value="" />
        <input type="hidden" name="scanner_reference" id="scanner_reference" value="" />

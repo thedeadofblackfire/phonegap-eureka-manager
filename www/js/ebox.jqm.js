@@ -166,7 +166,7 @@ jQuery(document).ready(function($){
 		
           //var user = dbAppUser.get();
           //console.log(objUser);
-          wcFwk.ajax_postJsonSync(API+'/getproductions', {office_seq: objUser.office.office_seq }, function(data) {
+          wcFwk.ajax_postJsonSync(API+'/getproductions', {office_seq: objUser.office.office_seq, status: 1 }, function(data) {
             //console.log(data);  
             if (data.items) { 
                 objProduction = {};    
@@ -236,7 +236,7 @@ jQuery(document).ready(function($){
                
        var $page = $( pageSelector );
        var $header = $page.children( ":jqmData(role=header)" );
-       $header.find( "h1" ).html('#'+prodnumber);
+       $header.find( "h1" ).html(prodnumber);
          
        /*         
        var chapterHTML = '';
@@ -244,7 +244,16 @@ jQuery(document).ready(function($){
        
        $content = $page.children( ":jqmData(role=main)" );
        $content.html(chapterHTML);
-       */
+       */       
+       $('#production_title').html(res.device_serial);       
+       $('#production_detail').html('Start: '+res.delivery_dt_start+'<br>End: '+res.delivery_dt_end+'<br>Total pouchs: '+res.total_bags+'<br>Total drugs: '+res.total_drugs);
+       $('#production_patient').html('Patient: '+res.f_name+' '+res.l_name+'<br>Gender: '+res.gender+'<br>Home Phone: '+res.phone_home+'<br>Cell Phone: '+res.phone_cell);
+       
+       $('#btn_scanner_code128').removeClass('ui-btn-b');
+       $('#btn_scanner_code128').removeClass('ui-btn-c');
+       $('#btn_scanner_datamatrix').removeClass('ui-btn-b');
+       $('#btn_scanner_datamatrix').removeClass('ui-btn-c');
+       
        $('#scanner_datamatrix').val('');
        $('#scanner_code128').val('');
        $('#scanner_result').html('');
@@ -398,7 +407,7 @@ jQuery(document).ready(function($){
         //var title = 'You have no active chats';
         //if (data.online_user.length > 0) title = 'Your currently active chats';
                                             
-        htmlList += '<ul id="chat_userlist" data-role="listview">';
+        htmlList += '<ul id="chat_userlist" data-role="listview" data-filter="true" data-filter-placeholder="Search productions..." data-inset="false">';
         //htmlUserList += '<li data-role="list-divider" id="activechat_title">'+title+'</li>';
         $.each(data, function(k, v) {
             htmlList += generateLineProduction(v);            
@@ -417,7 +426,7 @@ jQuery(document).ready(function($){
         // statehttp://www.iconarchive.com/show/american-states-icons-by-custom-icon-design.html
         
         //var lg = '<img src="img/country/us.png" alt="United States" class="ui-li-icon">';
-        var str = '<li><a href="#pageProd?id=' + v.prod_number + '">' + v.prod_number + ' <p>'+ v.f_name + ' ' + v.l_name +'</p></a></li>';
+        var str = '<li><a href="#pageProd?id=' + v.prod_number + '">' + v.prod_number + ' <p>'+ v.device_serial + ' - ' + v.f_name + ' ' + v.l_name +'</p><span class="ui-li-count">'+v.total_bags+' pouchs</span></a></li>';
 
         //str += '><a href="#pageChatSession?id=' + v.session_id + '" sid="'+v.session_id+'" data-theme="e">' + lg + v.name + ' <p class="ui-li-aside">started at <strong>'+formatDate(v.start_date)+'</strong></p> <span class="ui-li-count">'+(parseInt(v.totalmsg) + parseInt(v.totalreply))+'</span></a></li>';
 
