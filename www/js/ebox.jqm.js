@@ -236,7 +236,7 @@ jQuery(document).ready(function($){
                
        var $page = $( pageSelector );
        var $header = $page.children( ":jqmData(role=header)" );
-       $header.find( "h1" ).html(prodnumber);
+       $header.find( "h1" ).html(res.device_serial);
          
        /*         
        var chapterHTML = '';
@@ -245,9 +245,9 @@ jQuery(document).ready(function($){
        $content = $page.children( ":jqmData(role=main)" );
        $content.html(chapterHTML);
        */       
-       $('#production_title').html(res.device_serial);       
-       $('#production_detail').html('Start: '+res.delivery_dt_start+'<br>End: '+res.delivery_dt_end+'<br>Total pouchs: '+res.total_bags+'<br>Total drugs: '+res.total_drugs);
-       $('#production_patient').html('Patient: '+res.f_name+' '+res.l_name+'<br>Gender: '+res.gender+'<br>Home Phone: '+res.phone_home+'<br>Cell Phone: '+res.phone_cell);
+       //$('#production_title').html(res.device_serial);       
+       $('#production_detail').html('Production: <b>'+prodnumber+'</b><br>Start: '+res.delivery_dt_start+'<br>End: '+res.delivery_dt_end+'<br>Total pouchs: '+res.total_bags+'<br>Total drugs: '+res.total_drugs);
+       $('#production_patient').html('Ebox: <b>'+res.device_serial+'</b><br>Patient: <b>'+res.f_name+' '+res.l_name+' ('+res.gender+')</b><br>Phone: '+res.phone_home+'<br>Cell Phone: '+res.phone_cell);
        
        $('#btn_scanner_code128').removeClass('ui-btn-b');
        $('#btn_scanner_code128').removeClass('ui-btn-c');
@@ -426,7 +426,7 @@ jQuery(document).ready(function($){
         // statehttp://www.iconarchive.com/show/american-states-icons-by-custom-icon-design.html
         
         //var lg = '<img src="img/country/us.png" alt="United States" class="ui-li-icon">';
-        var str = '<li><a href="#pageProd?id=' + v.prod_number + '">' + v.prod_number + ' <p>'+ v.device_serial + ' - ' + v.f_name + ' ' + v.l_name +'</p><span class="ui-li-count">'+v.total_bags+' pouchs</span></a></li>';
+        var str = '<li><a href="#pageProd?id=' + v.prod_number + '">' + v.prod_number + ' <p>'+ v.device_serial + ' - ' + v.f_name + ' ' + v.l_name +'</p><span class="ui-li-count">'+v.total_bags+'</span></a></li>';
 
         //str += '><a href="#pageChatSession?id=' + v.session_id + '" sid="'+v.session_id+'" data-theme="e">' + lg + v.name + ' <p class="ui-li-aside">started at <strong>'+formatDate(v.start_date)+'</strong></p> <span class="ui-li-count">'+(parseInt(v.totalmsg) + parseInt(v.totalreply))+'</span></a></li>';
 
