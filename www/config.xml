@@ -4,12 +4,12 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.mls.ebox"
-        version   = "0.0.4">
+        version   = "0.0.5">
 
     <name>Eureka e-Box</name>
 
     <description>
-         Eureka e-Box using Ionic Framework, Cordova and AngularJS or JQM
+         Eureka e-Box
     </description>
 
     <author href="http://www.robotiktechnology.com" email="n.thomas@robotikdose.com">

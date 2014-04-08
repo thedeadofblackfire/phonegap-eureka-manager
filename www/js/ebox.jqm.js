@@ -71,9 +71,10 @@ var appEbox = {
     
     takeScannerDatamatrix: function() {
       // alert('takeScanner DATA_MATRIX');
+      // DATA_MATRIX or QR_CODE (global factories)
       cordova.plugins.barcodeScanner.scan(
           function (result) {
-              if (result.format == 'DATA_MATRIX') {
+              if (result.format == 'DATA_MATRIX' || result.format == 'QR_CODE') {
                 alert('Success: '+result.text);
                 
                 var reference = $('#scanner_reference').val();  
