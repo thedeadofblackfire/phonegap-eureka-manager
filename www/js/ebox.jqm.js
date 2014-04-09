@@ -366,6 +366,7 @@ jQuery(document).ready(function($){
                     mofChangePage('#pageList');
 				} else {	
                     //Invalid Email Address/Password
+                    $.mobile.loading('hide');
 					console.log(res.redirection_error);
 					if (ENV == 'dev') {
 						alert(res.redirection_error);
