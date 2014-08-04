@@ -344,7 +344,7 @@ jQuery(document).ready(function($){
 
 		if(u != '' && p!= '') {  
             $.mobile.loading('show');
-			$.post(API+"/authlogin", {login:u,pass:p,rememberme:1}, function(res) {
+			$.post(API+"/authloginoffice", {login:u,pass:p,rememberme:1}, function(res) {
 				console.log(res);
                 //$.mobile.hidePageLoadingMsg();
 				if(res.success == true) {
@@ -390,7 +390,7 @@ jQuery(document).ready(function($){
 	function handleLogout() {
 		console.log('handleLogout');	
 		
-		$.getJSON(API+"/logout", function(res) {
+		$.getJSON(API+"/authlogoutoffice", function(res) {
 			if (res.success) {
 				window.localStorage.clear();  
 				window.sessionStorage.clear();		
