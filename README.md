@@ -1,2 +1,2 @@
-phonegap-mls-ebox
+phonegap-eureka-manager
 =================
