@@ -5,9 +5,9 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android"
         id        = "com.mls.eboxmanager"
-        version   = "0.0.8">
+        version   = "0.1.0">
 
-    <name>e-Box Manager</name>
+    <name>Eureka Manager</name>
 
     <description>
          e-Box Manager for checking productions
